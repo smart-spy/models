@@ -59,10 +59,10 @@ def create_tf_example(example: ImageInfo):
                 continue
 
             xmins.append(float(xmin) / width)
-            xmins.append(float(xmin) / width)
             xmaxs.append(float(xmax) / width)
             ymins.append(float(ymin) / height)
             ymaxs.append(float(ymax) / height)
+
             classes_text.append(class_text.encode("utf8"))
             classes.append(example.class_id)
 
@@ -121,8 +121,6 @@ def main(_):
         #     tf_example = create_tf_example(example)
         #     writer.write(tf_example.SerializeToString())
         # writer.close()
-
-
 
 if __name__ == "__main__":
     tf.app.run()
