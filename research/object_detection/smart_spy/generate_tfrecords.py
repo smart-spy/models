@@ -99,7 +99,7 @@ def main(_):
 
     for ds in [train, test]:
         num_shards = 50
-        output_filebase = f"./object_detection/smart_spy/tfrecords/{ds.name}/tf.record"
+        output_filebase = f"./object_detection/smart_spy/dataset/tfrecords/{ds.name}/tf.record"
 
         image_path_list = chain(ds.glob("Person/*.jpg"), ds.glob("Car/*.jpg"))
         examples = [
