@@ -14,6 +14,7 @@
 # ==============================================================================
 
 """SSDFeatureExtractor for MobilenetV2 features."""
+      #batch_norm_trainable: true
 
 import tensorflow as tf
 
@@ -117,7 +118,7 @@ class SSDMobileNetV2FeatureExtractor(ssd_meta_arch.SSDFeatureExtractor):
 
     with tf.variable_scope('MobilenetV2', reuse=self._reuse_weights) as scope:
       with slim.arg_scope(
-          mobilenet_v2.training_scope(is_training=None, bn_decay=0.9997)), \
+          mobilenet_v2.training_scope(is_training=True, bn_decay=0.9997)), \
           slim.arg_scope(
               [mobilenet.depth_multiplier], min_depth=self._min_depth):
         with (slim.arg_scope(self._conv_hyperparams_fn())
