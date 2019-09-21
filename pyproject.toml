@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "models"
+version = "0.1.0"
+description = ""
+authors = ["Carlos Porta <cmaciasporta@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.6"
+Cython = "^0.29.13"
+tensorflow-gpu = "^1.14"
+contextlib2 = "^0.5.5"
+pillow = "^6.1"
+lxml = "^4.4"
+jupyter = "^1.0"
+matplotlib = "^3.1"
+opencv-python = "^4.1"
+
+[tool.poetry.dev-dependencies]
+pylama = "^7.7"
+black = {version = "^18.3-alpha.0", allows-prereleases = true}
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

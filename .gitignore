@@ -1,5 +1,6 @@
-# Dataset
-research/object_detection/custom_data/data/*
+# Dataset / TF Records
+research/object_detection/smart_spy/dataset/*
+research/object_detection/smart_spy/tfrecords/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
