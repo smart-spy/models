@@ -90,38 +90,38 @@ def create_tf_example(example: ImageInfo):
 
 
 def main(_):
-    writer = tf.io.TFRecordWriter("./object_detection/smart_spy/tfrecords/train_dataset.full.tfrecord")
-
-
     labels = dict(Person=1, Car=2)
 
     train = Path('./object_detection/smart_spy/dataset/train')
+    test = Path('./object_detection/smart_spy/dataset/test')
     # train = Path("/tmp/ds/train")
     # test = Path("/tmp/ds/test")
 
-    train_image_path_list = chain(train.glob("Person/*.jpg"), train.glob("Car/*.jpg"))
-    examples = [
-        to_image_info(i, i.parent.name, labels[i.parent.name])
-        for i in train_image_path_list
-    ]
+    for ds in [train, test]:
+        num_shards = 50
+        output_filebase = f"./object_detection/smart_spy/tfrecords/{ds.name}/tf.record"
 
-    num_shards = 600
-    output_filebase = "./object_detection/smart_spy/tfrecords/train_dataset.record"
+        image_path_list = chain(ds.glob("Person/*.jpg"), ds.glob("Car/*.jpg"))
+        examples = [
+            to_image_info(i, i.parent.name, labels[i.parent.name])
+            for i in image_path_list
+        ]
 
-    with contextlib2.ExitStack() as tf_record_close_stack:
-        output_tfrecords = tf_record_creation_util.open_sharded_output_tfrecords(
-            tf_record_close_stack, output_filebase, num_shards
-        )
-        for index, example in enumerate(examples):
-            tf_example = create_tf_example(example)
-            output_shard_index = index % num_shards
-            output_tfrecords[output_shard_index].write(tf_example.SerializeToString())
+        with contextlib2.ExitStack() as tf_record_close_stack:
+            output_tfrecords = tf_record_creation_util.open_sharded_output_tfrecords(
+                tf_record_close_stack, output_filebase, num_shards
+            )
+            for index, example in enumerate(examples):
+                tf_example = create_tf_example(example)
+                output_shard_index = index % num_shards
+                output_tfrecords[output_shard_index].write(tf_example.SerializeToString())
 
-    # for example in examples:
-    #     tf_example = create_tf_example(example)
-    #     writer.write(tf_example.SerializeToString())
+        # writer = tf.io.TFRecordWriter("./object_detection/smart_spy/tfrecords/train_dataset.full.tfrecord")
+        # for example in examples:
+        #     tf_example = create_tf_example(example)
+        #     writer.write(tf_example.SerializeToString())
+        # writer.close()
 
-    writer.close()
 
 
 if __name__ == "__main__":
