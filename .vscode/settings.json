@@ -2,5 +2,6 @@
     "python.linting.pylamaEnabled": true,
     "python.linting.enabled": true,
     "python.pythonPath": "/home/porta/.cache/pypoetry/virtualenvs/models-py3.6",
-    "python.formatting.provider": "black"
+    "python.formatting.provider": "black",
+    "python.linting.banditEnabled": false
 }

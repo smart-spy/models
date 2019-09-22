@@ -1,6 +1,10 @@
 # Dataset
 research/object_detection/smart_spy/dataset/*
 
+# Models
+research/object_detection/smart_spy/models/*
+!research/object_detection/smart_spy/models/pipelline.config
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
