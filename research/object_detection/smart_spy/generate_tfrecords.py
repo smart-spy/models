@@ -35,7 +35,7 @@ def create_tf_example(example: ImageInfo):
 
     encoded_image_io = io.BytesIO(encoded_image_data)
     image = Image.open(encoded_image_io)
-    height, width = image.size
+    width, height = image.size
     filename = example.path.name.encode("utf8")
     image_format = b"jpeg"
 
